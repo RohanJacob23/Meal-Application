@@ -1,26 +1,23 @@
 import React from "react";
-import Modals from "./Modals";
-import { useState } from "react";
+import { useContext } from "react";
+import { MealsContext } from "../context";
 
 function Card(props) {
-  const [display, setDisplay] = useState("hidden");
-  function visible() {
-    if (display === "hidden") setDisplay("flex");
-    else setDisplay("hidden");
-  }
+  const { selectMeal, addFav } = useContext(MealsContext);
+
   return (
     <>
-      <div className="rounded-lg shadow-lg bg-white " onClick={visible}>
+      <div className="rounded-lg shadow-lg bg-white">
         <img
           className="rounded-t-lg cursor-pointer w-full h-60 object-cover"
           src={props.imageUrl}
           alt=""
+          onClick={() => selectMeal(props.id)}
         />
         <div className="p-3 flex justify-between items-center">
           <h5 className="text-gray-900 text-xl font-medium ">
             {props.mealName}
           </h5>
-          {/* <img className="w-10 max-w-none " src={thumbsUp} alt="" /> */}
           <svg
             width="20"
             height="40"
@@ -28,6 +25,7 @@ function Card(props) {
             fill="currentColor"
             xmlns="http://www.w3.org/2000/svg"
             className="w-10 cursor-pointer hover:text-sky-700"
+            onClick={() => addFav(props.id)}
           >
             <g clipPath="url(#clip0)">
               <path
@@ -52,7 +50,6 @@ function Card(props) {
           </svg>
         </div>
       </div>
-      <Modals block={display} visibleFunc={visible} id={props.id} />
     </>
   );
 }

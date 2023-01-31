@@ -6,6 +6,7 @@ function Search() {
   const { fetchRandomMeals, setSearchTerm } = useContext(MealsContext);
   const [text, setText] = useState("");
 
+  // searching the userInputed text
   function search(e) {
     e.preventDefault();
     if (text) {
@@ -13,10 +14,12 @@ function Search() {
     }
   }
 
+  // changing the input value 
   function inputValue(e) {
     setText(e.currentTarget.value);
   }
 
+  // reseting all search after then surpise button is clicked
   function handelRandom() {
     setSearchTerm("");
     setText("");

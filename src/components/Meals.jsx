@@ -4,11 +4,13 @@ import Card from "./card";
 
 function Meals() {
   const { allMealsData, loading } = useContext(MealsContext);
-  console.log(allMealsData === null);
 
+  // loading screen till the api fetch is not complete
   if (loading) {
     return <div className="loader-spinner w-20 h-20 md:w-24 md:h-24"></div>;
   }
+
+  // if the the meal is not present in the api
   if (allMealsData === null) {
     return (
       <h1 className="text-2xl md:text-5xl p-7">
@@ -16,6 +18,7 @@ function Meals() {
       </h1>
     );
   }
+  // created a card component to dispaly all the meals in a card format
   const a = allMealsData.map((meal) => {
     return (
       <Card
@@ -27,7 +30,7 @@ function Meals() {
     );
   });
   return (
-    <div className="pt-10 px-5">
+    <div className="py-10 px-5">
       <div className="grid gird-1 md:grid-cols-3 gap-y-6 gap-x-10 max-w-6xl mx-auto">
         {a}
       </div>
